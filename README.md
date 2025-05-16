@@ -1,6 +1,6 @@
 # Volk Games Store
 
-![Volk Games Logo](/placeholder.svg?height=100&width=300)
+![Volk Games Logo]([/placeholder.svg?height=100&width=300](https://www.volkgames.store/img%20site/volkstore.png))
 
 ## Version 1.0 Beta
 
@@ -96,7 +96,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 - Website: [https://www.volkgames.store/](https://www.volkgames.store/)
-- Email: contact@volkgames.store
+- Email: volkstorehelp@gamil.com
 - GitHub: [https://github.com/volkgames](https://github.com/volkgames)
 
 ---
