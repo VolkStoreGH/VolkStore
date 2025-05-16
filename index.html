@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VolkStore - Магазин Игр для Steam</title>
+  <script src="/js_script/admin-site-integration.js"></script>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/donate-styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="preloader">
+      <div class="loader"></div>
+  </div>
+
+  <header>
+      <div class="logo">
+          <img src="img site/volkstore.png" alt="VolkStore" id="logo">
+      </div>
+      <nav>
+          <a href="#" class="nav-link">Сообщество👨‍💻 <span class="badge">Скоро</span></a>
+          <a href="#home" class="nav-link">Главная 🏢</a>
+          <a href="login.html" class="nav-link">Аккаунт 🔗</a>
+          <a href="#games" class="nav-link">Игры 🎮</a>
+          <a href="#" class="nav-link" id="donate-nav-link">Донат 💰</a>
+          <a href="#reviews" class="nav-link">Отзывы 👨‍👩‍👧‍👦</a>
+          <a href="#about" class="nav-link">О нас 🧑‍💻</a>
+          <a href="steam-payment.html" class="nav-link">Пополнить Steam 💵</a>
+          <a href="https://boosty.to/volkstoredonate" class="boosty-button" target="_blank" rel="noopener noreferrer">
+              <img src="img site/boosty.png" alt="Boosty Logo" class="boosty-logo">
+              Boosty
+          </a>
+      </nav>
+      <div class="floating-icon" id="icon1">🎮</div>
+      <div class="floating-icon" id="icon2">🕹️</div>
+      <div class="floating-icon" id="icon3">🏆</div>
+      <div class="floating-icon" id="icon4">🚀</div>
+      <div class="floating-icon" id="icon5">💻</div>
+      <div class="floating-icon" id="icon6">🗿</div>
+      <div class="floating-icon" id="icon7">🐺</div>
+  </header>
+
+  <div class="banner" id="home">
+      <h2 class="animated-text">Добро пожаловать в VolkStore🐺!</h2>
+      <p>Откройте для себя мир захватывающих игр и невероятных приключений</p>
+      <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Поиск игр...">
+          <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+      </div>
+  </div>
+
+  <section class="social-showcase">
+      <h2>Присоединяйтесь к нам</h2>
+      <div class="social-cards">
+          <div class="social-card vk">
+              <div class="social-icon">
+                  <i class="fab fa-vk"></i>
+              </div>
+              <h3>ВКонтакте</h3>
+              <p>Новости, акции и розыгрыши</p>
+              <div class="social-stats">
+                  <div class="stat">
+                      <span class="number">5K+</span>
+                      <span class="label">Подписчиков</span>
+                  </div>
+                  <div class="stat">
+                      <span class="number">100+</span>
+                      <span class="label">Постов</span>
+                  </div>
+              </div>
+              <a href="https://vk.com/volkstorevk" class="social-btn" target="_blank">Подписаться</a>
+          </div>
+          
+          <div class="social-card telegram">
+              <div class="social-icon">
+                  <i class="fab fa-telegram"></i>
+              </div>
+              <h3>Telegram</h3>
+              <p>Мгновенные уведомления о скидках</p>
+              <div class="social-stats">
+                  <div class="stat">
+                      <span class="number">3K+</span>
+                      <span class="label">Подписчиков</span>
+                  </div>
+                  <div class="stat">
+                      <span class="number">50+</span>
+                      <span class="label">Каналов</span>
+                  </div>
+              </div>
+              <a href="https://t.me/VolkStoreTg" class="social-btn" target="_blank">Присоединиться</a>
+          </div>
+          
+          <div class="social-card tiktok">
+              <div class="social-icon">
+                  <i class="fab fa-tiktok"></i>
+              </div>
+              <h3>TikTok</h3>
+              <p>Короткие видео и обзоры игр</p>
+              <div class="social-stats">
+                  <div class="stat">
+                      <span class="number">6 102</span>
+                      <span class="label">Подписчиков</span>
+                  </div>
+                  <div class="stat">
+                      <span class="number">2</span>
+                      <span class="label">Видео</span>
+                  </div>
+              </div>
+              <a href="https://www.tiktok.com/@volkstoretiktok?_t=ZS-8vqmrttGMxL&_r=1" class="social-btn" target="_blank">Смотреть</a>
+          </div>
+      </div>
+  </section>
+
+  
+      
+  </section>
+
+  <section class="reviews2">
+      <h2>Новинки 2024 🔥</h2>
+  </section>
+
+  <main class="game-grid" id="games">
+      <div class="game-card" data-categories="action rpg" data-platform="pc" data-price="3200">
+          
+          <div class="game-image-container">
+              <img src="Games/Elden Ring/Elden Ring.jpg" alt="Elden Ring">
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Отправляйтесь в эпическое приключение в мире, созданном Хидетакой Миядзаки и Джорджем Мартином.</p>
+                      <div class="game-features">
+                          <span>Открытый мир</span>
+                          <span>Сложность</span>
+                          <span>PvP</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">Elden Ring</h2>
+              <p class="game-genre">Action RPG, Открытый мир</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(5.0)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">3 200 ₽</span>
+              </div>
+              <a href="Games/Elden Ring/Elden Ring.html" class="buy-btn">
+                  <i class="fas fa-shopping-cart"></i> Купить
+              </a>
+          </div>
+      </div>
+
+      <div class="game-card" data-categories="action adventure" data-platform="pc playstation xbox" data-price="0">
+          <div class="game-image-container">
+              <img src="Games/GTA VI/GTA VI.jpg" alt="Grand Theft Auto V">
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>будущая компьютерная игра в жанре action-adventure с открытым миром,</p>
+                      <div class="game-features">
+                          <span>Открытый мир</span>
+                          <span>Мультиплеер</span>
+                          <span>Сюжет</span>
+                          <span>action</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">Grand Theft Auto VI</h2>
+              <div class="spacer"></div>
+              <div class="rating">
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">Скоро...</span>
+                  <span class="game-price">26 мая 2026 г.       ᅠ </span>
+                <span class="game-price">       ᅠ </span>
+                <a href="https://www.youtube.com/watch?v=QdBZY2fkU-0" class="social-btn" target="_blank">Первый трейлер</a>
+                <a href="https://www.youtube.com/watch?v=VQRLujxTm3c" class="social-btn" target="_blank">Второй трейлер</a>
+              </div>
+          </div>
+      </div>
+
+      <div class="game-card" data-categories="action rpg" data-platform="pc" data-price="385">
+          <div class="game-image-container">
+              <img src="Games/R.E.P.O/R.E.P.O.jpg" alt="R.E.P.O">
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Онлайн-игра ужасов с кооперативом, в которой могут участвовать до 6 игроков.</p>
+                      <div class="game-features">
+                          <span>Хоррор</span>
+                          <span>Сетевой кооператив</span>
+                          <span>Экшен</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">R.E.P.O</h2>
+              <p class="game-genre">Хоррор, Сетевой кооператив, Экшен</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(5.0)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">385 ₽</span>
+              </div>
+              <a href="Games/R.E.P.O/R.E.P.O.html" class="buy-btn">
+                  <i class="fas fa-shopping-cart"></i> Купить
+              </a>
+          </div>
+      </div>
+      
+      <div class="game-card" data-categories="action horror" data-platform="pc xbox" data-price="2499">
+          <div class="game-image-container">
+              <img src="/Games/S.T.A.L.K.E.R 2/S.T.A.L.K.E.R 2.jpg" alt="S.T.A.L.K.E.R 2">
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Долгожданное продолжение культовой серии. Исследуйте Зону и раскройте её тайны.</p>
+                      <div class="game-features">
+                          <span>Открытый мир</span>
+                          <span>Выживание</span>
+                          <span>Атмосфера</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">S.T.A.L.K.E.R 2</h2>
+              <p class="game-genre">Шутер, Выживание</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(5.0)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">2 499 ₽</span>
+              </div>
+              <a href="Games/S.T.A.L.K.E.R 2/S.T.A.L.K.E.R 2.html" class="buy-btn">
+                  <i class="fas fa-shopping-cart"></i> Купить
+              </a>
+          </div>
+      </div>
+      
+      <div class="game-card" data-categories="rpg adventure" data-platform="pc playstation xbox" data-price="0">
+          <div class="game-image-container">
+              <img src="Games/Hogwarts Legacy/Hogwarts Legacy.jpeg" alt="Hogwarts Legacy">
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Погрузитесь в мир Гарри Поттера и создайте свою собственную историю в Хогвартсе.</p>
+                      <div class="game-features">
+                          <span>Открытый мир</span>
+                          <span>Магия</span>
+                          <span>Исследование</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">Hogwarts Legacy</h2>
+              <p class="game-genre">RPG, Приключения</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(5.0)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">Нет в наличие</span>
+              </div>
+          </div>
+      </div>
+      
+      <div class="game-card" data-categories="horror action" data-platform="pc" data-price="320">
+          <div class="game-image-container">
+              <img src="Games/The Headliners/The Headliners.jpg" alt="The Headliners">
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Новый хоррор-экшен, который заставит вас испытать настоящий страх.</p>
+                      <div class="game-features">
+                          <span>Хоррор</span>
+                          <span>Атмосфера</span>
+                          <span>Сюжет</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">The Headliners</h2>
+              <p class="game-genre">Хоррор, Экшен</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>(4.5)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">320 ₽</span>
+              </div>
+              <a href="Games/The Headliners/The Headliners.html" class="buy-btn">
+                  <i class="fas fa-shopping-cart"></i> Купить
+              </a>
+          </div>
+      </div>
+  </main>
+
+  <section class="reviews2">
+      <h2>Остальные игры &#x1F3AE</h2>
+  </section>
+
+  <main class="game-grid">
+      <div class="game-card" data-categories="action rpg" data-platform="pc playstation xbox" data-price="1599">
+          <div class="game-image-container">
+              <img src="Games/cyberpunk/cyberpunk.jpg" alt="Cyberpunk 2077">
+              <div class="discount-label">-31%</div>
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Погрузитесь в мир будущего в роли наемника V в городе Найт-Сити.</p>
+                      <div class="game-features">
+                          <span>Открытый мир</span>
+                          <span>Киберпанк</span>
+                          <span>RPG</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">Cyberpunk 2077</h2>
+              <p class="game-genre">Action RPG, Открытый мир</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>(4.5)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">1 599 ₽</span>
+                  <span class="old-price">4 000 ₽</span>
+              </div>
+              <a href="Games/cyberpunk/cyberpunk2077.html" class="buy-btn">
+                  <i class="fas fa-shopping-cart"></i> Купить
+              </a>
+        </div>
+    </div>
+      
+      <div class="game-card" data-categories="simulation" data-platform="pc" data-price="1499">
+          <div class="game-image-container">
+              <img src="Games/Teardown/Teardown.jpg" alt="Teardown">
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Разрушайте всё на своем пути в этом уникальном симуляторе разрушений.</p>
+                      <div class="game-features">
+                          <span>Физика</span>
+                          <span>Разрушения</span>
+                          <span>Песочница</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">Teardown</h2>
+              <p class="game-genre">Симулятор, Разрушения</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>(4.5)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">1 499 ₽</span>
+              </div>
+              <a href="Games/Teardown/Teardown.html" class="buy-btn">
+                  <i class="fas fa-shopping-cart"></i> Купить
+              </a>
+          </div>
+      </div>
+      
+      <div class="game-card" data-categories="action adventure" data-platform="pc playstation xbox" data-price="0">
+          <div class="game-image-container">
+              <img src="Games/gta5/gta5.jpg" alt="Grand Theft Auto V">
+              <div class="discount-label">-25%</div>
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Исследуйте огромный открытый мир Лос-Сантоса и округа Блейн.</p>
+                      <div class="game-features">
+                          <span>Открытый мир</span>
+                          <span>Мультиплеер</span>
+                          <span>Сюжет</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">Grand Theft Auto V | Premium Edition</h2>
+              <p class="game-genre">Action, Открытый мир</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(5.0)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">Нет в наличие</span>
+              </div>
+          </div>
+      </div>
+      
+      <div class="game-card" data-categories="action adventure" data-platform="pc playstation xbox" data-price="1999">
+          <div class="game-image-container">
+              <img src="Games/Red Dead Redemption 2/Red Dead Redemption 2.jpg" alt="Red Dead Redemption 2">
+              <div class="game-overlay">
+                  <div class="overlay-content">
+                      <p>Эпическая история о жизни в безжалостном сердце Америки на заре современной эпохи.</p>
+                      <div class="game-features">
+                          <span>Открытый мир</span>
+                          <span>Вестерн</span>
+                          <span>Сюжет</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="game-info">
+              <h2 class="game-title">Red Dead Redemption 2</h2>
+              <p class="game-genre">Action, Открытый мир</p>
+              <div class="spacer"></div>
+              <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(5.0)</span>
+              </div>
+              <div class="spacer"></div>
+              <div class="price-container">
+                  <span class="game-price">1 699 ₽</span>
+              </div>
+              <a href="Games/Red Dead Redemption 2/Red Dead Redemption 2.html" class="buy-btn">
+                  <i class="fas fa-shopping-cart"></i> Купить
+              </a>
+          </div>
+      </div>
+  </main>
+
+  <!-- Кнопка "Посмотреть больше игр" -->
+  <div class="more-games-container">
+      <button id="more-games-btn" class="more-games-btn">
+          <i class="fas fa-gamepad"></i> Посмотреть больше игр
+      </button>
+  </div>
+
+  <!-- Модальное окно для доната -->
+  <!-- Добавьте этот код в ваш HTML файл внутри модального окна доната -->
+<div id="donate-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2 id="donate-modal-title">Выберите игру для доната</h2>
+    
+    <div class="donate-game-selector">
+      <div class="donate-game-tabs">
+        <button class="donate-game-tab active" data-game="Elden Ring">Elden Ring</button>
+        <button class="donate-game-tab" data-game="Genshin Impact">Genshin Impact</button>
+        <button class="donate-game-tab" data-game="Zenless Zone Zero">Zenless Zone Zero</button>
+        <button class="donate-game-tab" data-game="Cyberpunk 2077">Cyberpunk 2077</button>
+        <button class="donate-game-tab" data-game="S.T.A.L.K.E.R 2">S.T.A.L.K.E.R 2</button>
+      </div>
+      
+      <div class="donate-options-list" id="donate-options-list">
+        <!-- Опции доната будут добавлены динамически -->
+      </div>
+    </div>
+    
+    <!-- Контейнер для информации о выбранной опции -->
+    <div id="selected-donate-info" class="selected-donate-info">
+      <!-- Информация о выбранной опции будет добавлена динамически -->
+    </div>
+    
+    <div class="donate-payment-methods">
+      <h3>Способ оплаты</h3>
+      <div class="payment-options">
+        <label class="payment-option">
+          <input type="radio" name="payment" value="card" checked>
+          <span class="payment-icon"><i class="fas fa-credit-card"></i></span>
+          <span>Банковская карта</span>
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="payment" value="qiwi">
+          <span class="payment-icon"><i class="fas fa-wallet"></i></span>
+          <span>QIWI</span>
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="payment" value="webmoney">
+          <span class="payment-icon"><i class="fas fa-money-bill-wave"></i></span>
+          <span>WebMoney</span>
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="payment" value="crypto">
+          <span class="payment-icon"><i class="fas fa-coins"></i></span>
+          <span>Криптовалюта</span>
+        </label>
+      </div>
+      
+      <button class="submit-donate-btn">Оплатить</button>
+    </div>
+  </div>
+</div>
+
+<!-- Обновленная структура модального окна поиска с новыми чекбоксами -->
+<div id="search-modal" class="modal">
+  <div class="modal-content search-modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Расширенный поиск игр</h2>
+    <div class="advanced-search-form">
+      <div class="search-field">
+        <label for="search-name">Название игры:</label>
+        <input type="text" id="search-name" placeholder="Введите название игры...">
+      </div>
+      <div class="search-field">
+        <label>Категории:</label>
+        <div class="search-categories">
+          <div class="search-category">
+            <input type="checkbox" id="category-action" value="action">
+            <label for="category-action">Экшен</label>
+          </div>
+          <div class="search-category">
+            <input type="checkbox" id="category-rpg" value="rpg">
+            <label for="category-rpg">RPG</label>
+          </div>
+          <div class="search-category">
+            <input type="checkbox" id="category-adventure" value="adventure">
+            <label for="category-adventure">Приключения</label>
+          </div>
+          <div class="search-category">
+            <input type="checkbox" id="category-simulation" value="simulation">
+            <label for="category-simulation">Симуляторы</label>
+          </div>
+          <div class="search-category">
+            <input type="checkbox" id="category-strategy" value="strategy">
+            <label for="category-strategy">Стратегии</label>
+          </div>
+          <div class="search-category">
+            <input type="checkbox" id="category-sports" value="sports">
+            <label for="category-sports">Спорт</label>
+          </div>
+          <div class="search-category">
+            <input type="checkbox" id="category-horror" value="horror">
+            <label for="category-horror">Хоррор</label>
+          </div>
+        </div>
+      </div>
+      <!-- Обновленный код для секции платформ в модальном окне поиска -->
+      <!-- Обновленный HTML-код для секции платформ в модальном окне поиска -->
+        <div class="search-field">
+        <label>Платформы:</label>
+        <div class="search-platforms">
+            <div class="search-platform">
+            <input type="checkbox" id="platform-steam" value="steam">
+            <label for="platform-steam">Steam</label>
+            </div>
+            <div class="search-platform">
+            <input type="checkbox" id="platform-rockstar" value="rockstar">
+            <label for="platform-rockstar">Rockstar Games</label>
+            </div>
+        </div>
+        </div>
+      <div class="search-field">
+        <label>Цена:</label>
+        <div class="search-price-range">
+          <div class="price-range-group">
+            <span>От:</span>
+            <input type="number" id="search-min-price" min="0" value="0">
+            <span>₽</span>
+          </div>
+          <div class="price-range-group">
+            <span>До:</span>
+            <input type="number" id="search-max-price" min="0" value="5000">
+            <span>₽</span>
+          </div>
+        </div>
+      </div>
+      <div class="search-field">
+        <label>Рейтинг:</label>
+        <div class="search-rating">
+          <select id="search-rating">
+            <option value="0">Любой рейтинг</option>
+            <option value="3">От 3 звезд</option>
+            <option value="4">От 4 звезд</option>
+            <option value="5">Только 5 звезд</option>
+          </select>
+        </div>
+      </div>
+      <button id="apply-search" class="apply-search-btn">Найти игры</button>
+    </div>
+    <div class="search-results">
+      <h3>Результаты поиска:</h3>
+      <div id="search-results-container">
+        <!-- Результаты поиска будут добавлены здесь -->
+      </div>
+    </div>
+  </div>
+</div>
+
+  <section class="about-us" id="about">
+      <h2>О нас</h2>
+      <div class="about-content">
+          <div class="about-image">
+              <img src="img site/Mem_Godzo.png" alt="О нас">
+          </div>
+          <div class="about-text">
+              <p>VolkStore - это инновационный онлайн-магазин игр, созданный страстным геймерам для геймеров. Наша миссия - предоставить вам доступ к лучшим играм со всего мира по самым выгодным ценам.</p>
+              <div class="about-features">
+                  <div class="feature">
+                      <i class="fas fa-shield-alt"></i>
+                      <span>Безопасные платежи</span>
+                  </div>
+                  <div class="feature">
+                      <i class="fas fa-bolt"></i>
+                      <span>Мгновенная доставка</span>
+                  </div>
+                  <div class="feature">
+                      <i class="fas fa-headset"></i>
+                      <span>Поддержка 24/7</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section class="stats">
+      <div class="stats-grid">
+          <div class="stat-card">
+              <div class="stat-icon">
+                  <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-number" data-count="10000">0</div>
+              <p>Довольных клиентов</p>
+          </div>
+          <div class="stat-card">
+              <div class="stat-icon">
+                  <i class="fas fa-gamepad"></i>
+              </div>
+              <div class="stat-number" data-count="20+">0</div>
+              <p>Игр в каталоге</p>
+          </div>
+          <div class="stat-card">
+              <div class="stat-icon">
+                  <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-number" data-count="24">0</div>
+              <p>Часа поддержки</p>
+          </div>
+          <div class="stat-card">
+              <div class="stat-icon">
+                  <i class="fas fa-trophy"></i>
+              </div>
+              <div class="stat-number" data-count="99">0</div>
+              <p>% довольных клиентов</p>
+          </div>
+      </div>
+  </section>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-sections">
+        
+        
+        <div class="footer-section">
+          <h3>Информация</h3>
+          <ul class="footer-links">
+            <li><a href="information_site/terms-of-sale.html">Условия продажи</a></li>
+            <li><a href="information_site/privacy-policy.html">Политика конфиденциальности</a></li>
+            <li><a href="information_site/user-agreement.html">Пользовательское соглашение</a></li>
+            <li><a href="information_site/contacts.html">Контакты</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Поддержка</h3>
+          <a href="#" class="support-btn">Написать в поддержку</a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>2025 © VolkStore — маркетплейс игровых товаров и услуг. Все права защищены.</p>
+        <div class="social-links">
+          <a href="https://vk.com/volkstorevk" target="_blank"><i class="fab fa-vk"></i></a>
+          <a href="https://t.me/VolkStoreTg" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.tiktok.com/@volkstoretiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <footer>
+      <div class="footer-container" id="socseti">
+          
+      </div>
+  </footer>
+
+  <div class="bottom-nav">
+      <a href="/admin panel/admin-panel.html">Главная</a>
+      <a href="#games">Игры</a>
+      <a href="#" id="donate-bottom-link">Донат</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#about">О нас</a>
+      <div class="social-icons">
+          <a href="https://vk.com/volkstorevk" target="_blank"><i class="fab fa-vk"></i></a>
+          <a href="https://t.me/VolkStoreTg" target="_blank"><i class="fab fa-telegram"></i></a>
+      </div>
+  </div>
+
+  <button id="backToTop" class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="js_script/script.js"></script>
+</body>
+</html>

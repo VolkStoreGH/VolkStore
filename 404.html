@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background image with overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/detail_d5bca9b8ea6c16cc1ffdf31b787420ee.jpg-RaTkwBMtmrS8Eh30KKPFrdJnllJj3r.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.4);
+            z-index: -2;
+        }
+        
+        /* Dark overlay for better text readability */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.8) 100%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .error-code {
+            font-size: 150px;
+            font-weight: bold;
+            color: #f0f0f0;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        
+        .error-message {
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        
+        .description {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .home-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: rgba(51, 51, 51, 0.8);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .home-button:hover {
+            background-color: rgba(80, 80, 80, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .okak-text {
+            font-size: 40px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-top: 40px;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            color: #f0f0f0;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .error-code {
+                font-size: 100px;
+            }
+            
+            .error-message {
+                font-size: 22px;
+            }
+            
+            .description {
+                font-size: 18px;
+            }
+            
+            .okak-text {
+                font-size: 32px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 80px;
+            }
+            
+            .error-message {
+                font-size: 20px;
+            }
+            
+            .description {
+                font-size: 16px;
+            }
+            
+            .okak-text {
+                font-size: 28px;
+            }
+            
+            .home-button {
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="error-code">404</h1>
+        <p class="error-message">Упс! Страница, которую вы ищете, исчезла в темноте.</p>
+        <p class="description">Кажется, вы отправились на неизведанную территорию. Наш таинственный кошачий страж заметил ваше присутствие.</p>
+        <a href="index.html" class="home-button">Вернутся на главную страницу</a>
+        <div class="okak-text">окак</div>
+    </div>
+</body>
+</html>

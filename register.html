@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolkStore - Регистрация</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth-style.css">
+    <style>
+        /* Дополнительные стили для страницы регистрации */
+        
+        
+        /* Стили для отображения сообщения */
+        #message {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: rgba(0, 200, 83, 0.2);
+            color: var(--success-color);
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            border-radius: 5px;
+        }
+        
+        #errorMessage {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: rgba(255, 0, 0, 0.2);
+            color: #ff5252;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        /* Стили для кнопок в углу */
+        .corner-buttons {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .corner-button {
+            background-color: rgba(98, 0, 255, 0.8);
+            color: var(--light-color);
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            width: auto;
+        }
+
+        .corner-button:hover {
+            background-color: var(--accent-color);
+        }
+        
+        /* Адаптивные стили */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            input, button {
+                padding: 10px;
+            }
+            
+            .floating-bg {
+                opacity: 0.15;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Кнопки в углу -->
+    <div class="corner-buttons">
+        <button class="corner-button" onclick="goBack()">Назад</button>
+        <button class="corner-button" onclick="goToMain()">Главная</button>
+    </div>
+
+    <div class="floating-bg" id="bg1"></div>
+    <div class="floating-bg" id="bg2"></div>
+    <div class="floating-bg" id="bg3"></div>
+    <div class="container">
+        <h1>VolkStore</h1>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Подтвердите пароль</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <button class="google-btn">
+            <img src="img site/google.png" alt="Google logo">
+            Регистрация через Google
+        </button>
+        <div class="switch-form">
+            <a href="login.html">Уже есть аккаунт? Войти</a>
+        </div>
+        <div id="message"></div>
+        <div id="errorMessage"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            const messageDiv = document.getElementById('message');
+            const errorMessageDiv = document.getElementById('errorMessage');
+
+            registerForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Предотвращаем отправку формы
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                // Скрываем предыдущие сообщения
+                messageDiv.style.display = 'none';
+                errorMessageDiv.style.display = 'none';
+
+                // Базовая валидация на стороне клиента
+                if (password !== confirmPassword) {
+                    errorMessageDiv.textContent = "Пароли не совпадают";
+                    errorMessageDiv.style.display = "block";
+                    return;
+                }
+
+                if (password.length < 6) {
+                    errorMessageDiv.textContent = "Пароль должен содержать не менее 6 символов";
+                    errorMessageDiv.style.display = "block";
+                    return;
+                }
+
+                // Создаем объект FormData для отправки данных
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('password', password);
+                formData.append('confirmPassword', confirmPassword);
+
+                // Отправляем данные на сервер
+                fetch('register_handler.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Показываем сообщение об успехе
+                        messageDiv.textContent = data.message;
+                        messageDiv.style.display = "block";
+                        
+                        // Очищаем форму
+                        registerForm.reset();
+                        
+                        // Перенаправляем на страницу профиля через 2 секунды
+                        setTimeout(() => {
+                            window.location.href = 'profile.php';
+                        }, 2000);
+                    } else {
+                        // Показываем сообщение об ошибке
+                        errorMessageDiv.textContent = data.message;
+                        errorMessageDiv.style.display = "block";
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    errorMessageDiv.textContent = "Произошла ошибка при отправке данных. Пожалуйста, попробуйте позже.";
+                    errorMessageDiv.style.display = "block";
+                });
+            });
+        });
+
+        function goBack() {
+            window.location.href = "login.html"; // Возврат на страницу входа
+        }
+
+        function goToMain() {
+            window.location.href = "index.html"; // Переход на главную страницу
+        }
+    </script>
+</body>
+</html>

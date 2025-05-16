@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Успешная оплата - VolkStore</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6200ff;
+            --secondary-color: #5a00eb;
+            --accent-color: #a471f7;
+            --dark-color: #4a00c2;
+            --light-color: #ffffff;
+            --success-color: #00c853;
+            --danger-color: #ff0000;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--light-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        #logo {
+            width: 300px;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        #logo:hover {
+            transform: scale(1.05);
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        #icon1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        #icon2 {
+            top: 20%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+        #icon3 {
+            bottom: 45%;
+            left: 31%;
+            animation-delay: 2s;
+        }
+        #icon4 {
+            bottom: 25%;
+            right: 15%;
+            animation-delay: 1.5s;
+        }
+        #icon5 {
+            bottom: 5%;
+            right: 45%;
+            animation-delay: 1.5s;
+        }
+
+        .payment-status {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-status::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right, rgb(153, 0, 255), rgb(55, 0, 255));
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .status-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            color: var(--success-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .status-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--light-color);
+        }
+
+        .status-message {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .payment-details {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .detail-value {
+            color: var(--light-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all var(--transition-speed) ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .redirect-message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .countdown {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .status-container {
+                padding: 30px 20px;
+            }
+
+            .status-icon {
+                font-size: 4em;
+            }
+
+            .status-title {
+                font-size: 2em;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .status-container {
+                padding: 20px 15px;
+            }
+
+            .status-icon {
+                font-size: 3.5em;
+            }
+
+            .status-title {
+                font-size: 1.8em;
+            }
+
+            .status-message {
+                font-size: 1em;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .floating-icon {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <header>
+        <img src="/img site/volkstore.png" alt="VolkStore" id="logo">
+        <div class="floating-icon" id="icon1">🎮</div>
+        <div class="floating-icon" id="icon2">🕹️</div>
+        <div class="floating-icon" id="icon3">🏆</div>
+        <div class="floating-icon" id="icon4">🚀</div>
+        <div class="floating-icon" id="icon5">💻</div>
+    </header>
+
+    <main class="payment-status">
+        <div class="status-container">
+            <div class="status-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="status-title">Оплата успешно завершена!</h1>
+            <p class="status-message">Спасибо за покупку! Ваш заказ был успешно оплачен и обрабатывается.</p>
+            
+            <p class="status-message">Ключ активации и инструкции будут отправлены в течение 24 часов на указоне место.</p>
+            
+            <div class="action-buttons">
+                <a href="index.html" class="btn btn-primary">
+                    <i class="fas fa-home"></i> На главную
+                </a>
+            </div>
+            
+            <div class="redirect-message">
+                Вы будете автоматически перенаправлены на главную страницу через <span id="countdown" class="countdown">10</span> секунд
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 VolkStore. Все права защищены.</p>
+            <div class="footer-links">
+                <a href="#">О нас</a>
+                <a href="#">Помощь</a>
+                <a href="#">Контакты</a>
+            </div>
+            <div class="social-links">
+                <a href="https://vk.com/volkstorevk" target="_blank" aria-label="Вконтакте"><i class="fab fa-vk"></i></a>
+                <a href="https://t.me/VolkStoreTg" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="#" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            preloader.classList.add('hidden');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+
+            startRedirectCountdown();
+        });
+
+        function startRedirectCountdown() {
+            let seconds = 10;
+            const countdownElement = document.getElementById('countdown');
+
+            const countdownInterval = setInterval(function() {
+                seconds--;
+                countdownElement.textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolkStore - Пополнение баланса Steam</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+
+        
+
+        .payment-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #5a00eb;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .payment-method {
+            background-color: #6200ff;
+            border: 2px solid #7f30ff;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover, .payment-method.active {
+            background-color: #7f30ff;
+            transform: translateY(-5px);
+        }
+
+        .payment-method i {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .payment-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .payment-form input, .payment-form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .payment-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .payment-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4d00c9;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .payment-form button:hover {
+            background-color: #6200ff;
+        }
+
+        .payment-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .payment-info p {
+            margin-bottom: 10px;
+        }
+
+        .payment-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            flex: 1;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #7f30ff;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #7f30ff;
+            z-index: 0;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .currency-info {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .payment-steps {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .step::after {
+                display: none;
+            }
+            
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="img site/volkstore.png" alt="VolkStore" id="logo">
+        </div>
+        <nav>
+            <a href="" class="nav-link">Сообщество👨‍💻 <span class="badge">Скоро</span></a>
+            <a href="index.html" class="nav-link">Главная 🏢</a>
+            <a href="index.html#games" class="nav-link">Игры 🎮</a>
+            <a href="index.html" class="nav-link" id="donate-nav-link">Донат 💰</a>
+            <a href="index.html#reviews" class="nav-link">Отзывы 👨‍👩‍👧‍👦</a>
+            <a href="index.html#about" class="nav-link">О нас 🧑‍💻</a>
+            <a href="https://boosty.to/volkstoredonate" class="boosty-button" target="_blank" rel="noopener noreferrer">
+                <img src="img site/boosty.png" alt="Boosty Logo" class="boosty-logo">
+                Boosty
+            </a>
+        </nav>
+        <div class="floating-icon" id="icon1">🎮</div>
+        <div class="floating-icon" id="icon2">🕹️</div>
+        <div class="floating-icon" id="icon3">🏆</div>
+        <div class="floating-icon" id="icon4">🚀</div>
+        <div class="floating-icon" id="icon5">💻</div>
+        <div class="floating-icon" id="icon6">🗿</div>
+        <div class="floating-icon" id="icon7">🐺</div>
+    </header>
+
+    <div class="banner">
+        <h2>Пополнение баланса Steam</h2>
+        <p>Быстро, безопасно и без лишних комиссий</p>
+    </div>
+
+    <section class="steam-payment" id="steam-payment">
+        <div class="payment-container">
+            <div class="payment-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p>Введите данные</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p>Подтвердите платеж</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p>Получите средства</p>
+                </div>
+            </div>
+
+            <div class="payment-info">
+                <p><i class="fas fa-info-circle"></i> Пополнить можно РФ или СНГ аккаунт. За конвертацию валюты снимается комиссия до 10% - на баланс придет немного меньше, чем отправите.</p>
+                <p><i class="fas fa-clock"></i> Средства поступают на счет в течение 5-15 минут после подтверждения платежа.</p>
+            </div>
+
+            <form class="payment-form" id="steamPaymentForm">
+                <div class="form-group">
+                    <label for="steamId">Steam ID или логин:</label>
+                    <input type="text" id="steamId" placeholder="Введите ваш Steam ID или логин" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Сумма пополнения (₽):</label>
+                    <input type="number" id="amount" min="100" step="100" value="1000" required>
+                    <div class="currency-info">Мин сумма: 10 ₽ | Макс сумма: 14 999 ₽</div>
+                </div>
+                ᅠ
+
+                <div class="form-group">
+                    <label for="email">Email для чека:</label>
+                    <input type="email" id="email" placeholder="example@mail.ru" required>
+                </div>
+
+                <button type="submit">Оплатить</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container" id="socseti" >
+            <p>Наши соцсети</p>
+            <div class="social-links">
+                <a href="https://vk.com/volkstorevk" target="_blank" aria-label="Вконтакте"><i class="fab fa-vk"></i></a>
+                <a href="https://t.me/VolkStoreTg" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="" target="_blank" aria-label="Telegram"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p> ᅠ ᅠ </p>
+            <p>&copy; 2024 VolkStore. Все права защищены.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Обработка выбора метода оплаты
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', () => {
+                // Удаляем активный класс со всех методов
+                document.querySelectorAll('.payment-method').forEach(m => {
+                    m.classList.remove('active');
+                });
+                
+                // Добавляем активный класс на выбранный метод
+                method.classList.add('active');
+                
+                // Показываем соответствующие поля для выбранного метода
+                const paymentMethod = method.getAttribute('data-method');
+                
+                // Скрываем все детали оплаты
+                document.querySelectorAll('.payment-details').forEach(details => {
+                    details.style.display = 'none';
+                });
+                
+                // Показываем детали для выбранного метода
+                const detailsElement = document.getElementById(paymentMethod + 'PaymentDetails');
+                if (detailsElement) {
+                    detailsElement.style.display = 'block';
+                }
+            });
+        });
+
+        // Форматирование номера карты
+        const cardNumberInput = document.getElementById('cardNumber');
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                let formattedValue = '';
+                
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                
+                e.target.value = formattedValue;
+            });
+        }
+
+        // Форматирование даты истечения срока
+        const expiryDateInput = document.getElementById('expiryDate');
+        if (expiryDateInput) {
+            expiryDateInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2);
+                }
+                
+                e.target.value = value;
+            });
+        }
+
+        // Обработка отправки формы
+        document.getElementById('steamPaymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const steamId = document.getElementById('steamId').value;
+            const amount = document.getElementById('amount').value;
+            const email = document.getElementById('email').value;
+            
+            // Получаем выбранный метод оплаты
+            const selectedMethod = document.querySelector('.payment-method.active');
+            const paymentMethod = selectedMethod ? selectedMethod.getAttribute('data-method') : 'card';
+            
+            // Здесь можно добавить валидацию полей
+            
+            // Имитация отправки данных на сервер
+            alert(`Перенаправление на страницу оплаты...\n\nSteam ID: ${steamId}\nСумма: ${amount} ₽\nEmail: ${email}\nМетод оплаты: ${paymentMethod}`);
+            
+            // В реальном приложении здесь был бы код для отправки данных на сервер
+            // и перенаправления на страницу оплаты
+        });
+
+        // Анимация появления элементов при прокрутке
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.payment-container, .payment-method').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Параллакс эффект для баннера
+        window.addEventListener('scroll', () => {
+            const banner = document.querySelector('.banner');
+            const scrollPosition = window.pageYOffset;
+            banner.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        
+    </script>
+    <script src="js_script/script.js"></script>
+</body>
+</html>

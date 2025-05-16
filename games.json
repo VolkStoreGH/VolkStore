@@ -1,0 +1,37 @@
+{
+  "GAME-20250321-001": {
+    "title": "Cyberpunk 2077",
+    "price": 5499,
+    "currency": "RUB",
+    "description": "Cyberpunk 2077 — приключенческая ролевая игра с открытым миром, рассказывающая о киберпанке-наёмнике Ви и борьбе за жизнь в мегаполисе Найт-Сити.",
+    "in_stock": true
+  },
+  "GAME-20250321-002": {
+    "title": "Elden Ring",
+    "price": 3599,
+    "currency": "RUB",
+    "description": "Elden Ring — компьютерная игра в жанре action/RPG с открытым миром, разработанная японской компанией FromSoftware и изданная компанией Bandai Namco Entertainment.",
+    "in_stock": true
+  },
+  "GAME-20250321-003": {
+    "title": "God of War",
+    "price": 4499,
+    "currency": "RUB",
+    "description": "God of War — компьютерная игра в жанре action-adventure, разработанная компанией Santa Monica Studio и изданная Sony Interactive Entertainment для платформы PlayStation 4.",
+    "in_stock": true
+  },
+  "GAME-20250321-004": {
+    "title": "Red Dead Redemption 2",
+    "price": 2499,
+    "currency": "RUB",
+    "description": "Red Dead Redemption 2 — компьютерная игра в жанрах action-adventure и шутера от третьего лица с открытым миром, разработанная Rockstar Studios.",
+    "in_stock": false
+  },
+  "GAME-20250321-005": {
+    "title": "The Last of Us Part II",
+    "price": 3999,
+    "currency": "RUB",
+    "description": "The Last of Us Part II — компьютерная игра в жанре приключенческого боевика с элементами survival horror и стелс-экшена от третьего лица, разработанная Naughty Dog.",
+    "in_stock": true
+  }
+}

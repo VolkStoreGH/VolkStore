@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolkStore - Профиль</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            font-family: "Roboto", sans-serif;
+            padding-top: 80px;
+        }
+        
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            margin-right: 20px;
+            color: white;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-info h1 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+        }
+        
+        .profile-info p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .profile-tabs {
+            display: flex;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .profile-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: var(--light-color);
+            text-decoration: none;
+        }
+        
+        .profile-tab.active {
+            background-color: var(--accent-color);
+        }
+        
+        .profile-tab:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-content {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 300;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: var(--light-color);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .logout-btn {
+            background-color: rgba(255, 0, 0, 0.7);
+        }
+        
+        .logout-btn:hover {
+            background-color: rgba(255, 0, 0, 0.9);
+        }
+        
+        .message {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .success-message {
+            background-color: rgba(0, 200, 83, 0.2);
+            color: #00c853;
+            border: 1px solid rgba(0, 200, 83, 0.3);
+        }
+        
+        .error-message {
+            background-color: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        
+        .corner-buttons {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .corner-button {
+            background-color: rgba(98, 0, 255, 0.8);
+            color: var(--light-color);
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .corner-button:hover {
+            background-color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .profile-tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Кнопки в углу -->
+    <div class="corner-buttons">
+        <button class="corner-button" onclick="goToMain()">Главная</button>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar" id="avatar-initial"></div>
+            <div class="profile-info">
+                <h1 id="profile-name">Загрузка...</h1>
+                <p id="profile-email">Загрузка...</p>
+                <p>Аккаунт создан: <span id="profile-created">Загрузка...</span></p>
+            </div>
+        </div>
+        
+        <div class="profile-tabs">
+            <a href="#profile" class="profile-tab active" data-tab="profile-tab">Профиль</a>
+            <a href="#password" class="profile-tab" data-tab="password-tab">Изменить пароль</a>
+        </div>
+        
+        <div class="profile-content">
+            <div class="tab-content active" id="profile-tab">
+                <h2>Редактировать профиль</h2>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <button type="submit">Сохранить изменения</button>
+                </form>
+                <div id="profile-message" class="message"></div>
+            </div>
+            
+            <div class="tab-content" id="password-tab">
+                <h2>Изменить пароль</h2>
+                <form id="password-form">
+                    <div class="form-group">
+                        <label for="current-password">Текущий пароль</label>
+                        <input type="password" id="current-password" name="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Новый пароль</label>
+                        <input type="password" id="new-password" name="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Подтвердите новый пароль</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                    <button type="submit">Изменить пароль</button>
+                </form>
+                <div id="password-message" class="message"></div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="logout-btn" class="logout-btn">Выйти из аккаунта</button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html'; // Redirect to login if not logged in
+                return;
+            }
+            
+            // Get current user
+            const currentUser = getCurrentUser();
+            
+            // Update profile info
+            document.getElementById('profile-name').textContent = currentUser.name;
+            document.getElementById('profile-email').textContent = currentUser.email;
+            
+            // Format date
+            const createdDate = new Date(currentUser.createdAt);
+            document.getElementById('profile-created').textContent = createdDate.toLocaleDateString();
+            
+            // Set avatar initial
+            const avatarInitial = document.getElementById('avatar-initial');
+            avatarInitial.textContent = currentUser.name.charAt(0).toUpperCase();
+            
+            // Fill form fields
+            document.getElementById('name').value = currentUser.name;
+            document.getElementById('email').value = currentUser.email;
+            
+            // Tab switching
+            const tabs = document.querySelectorAll('.profile-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs and contents
+                    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Profile form submission
+            const profileForm = document.getElementById('profile-form');
+            const profileMessage = document.getElementById('profile-message');
+            
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                
+                const result = updateUserProfile(name, email);
+                
+                if (result.success) {
+                    profileMessage.textContent = result.message;
+                    profileMessage.className = "message success-message";
+                    profileMessage.style.display = "block";
+                    
+                    // Update displayed name and email
+                    document.getElementById('profile-name').textContent = name;
+                    document.getElementById('profile-email').textContent = email;
+                    
+                    // Update avatar initial
+                    avatarInitial.textContent = name.charAt(0).toUpperCase();
+                    
+                    setTimeout(() => {
+                        profileMessage.style.display = "none";
+                    }, 3000);
+                } else {
+                    profileMessage.textContent = result.message;
+                    profileMessage.className = "message error-message";
+                    profileMessage.style.display = "block";
+                }
+            });
+            
+            // Password form submission
+            const passwordForm = document.getElementById('password-form');
+            const passwordMessage = document.getElementById('password-message');
+            
+            passwordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const currentPassword = document.getElementById('current-password').value;
+                const newPassword = document.getElementById('new-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (newPassword !== confirmPassword) {
+                    passwordMessage.textContent = "Новые пароли не совпадают";
+                    passwordMessage.className = "message error-message";
+                    passwordMessage.style.display = "block";
+                    return;
+                }
+                
+                const result = changePassword(currentPassword, newPassword);
+                
+                if (result.success) {
+                    passwordMessage.textContent = result.message;
+                    passwordMessage.className = "message success-message";
+                    passwordMessage.style.display = "block";
+                    
+                    // Clear form
+                    passwordForm.reset();
+                    
+                    setTimeout(() => {
+                        passwordMessage.style.display = "none";
+                    }, 3000);
+                } else {
+                    passwordMessage.textContent = result.message;
+                    passwordMessage.className = "message error-message";
+                    passwordMessage.style.display = "block";
+                }
+            });
+            
+            // Logout button
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                logoutUser();
+                window.location.href = 'index.html';
+            });
+        });
+        
+        function goToMain() {
+            window.location.href = "index.html"; // Переход на главную страницу
+        }
+    </script>
+</body>
+</html>

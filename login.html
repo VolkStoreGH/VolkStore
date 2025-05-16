@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolkStore - Вход</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth-style.css">
+    <style>
+        /* Стили для отображения сообщения */
+        #message {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+        }
+        
+        #errorMessage {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+        }
+
+        /* Стили для кнопок в углу */
+        .corner-buttons {
+            position: fixed;
+            top: 10px; /* Отступ от верхнего края */
+            right: 1825px; /* Отступ от правого края */
+            z-index: 1000; /* Чтобы кнопки были поверх всего контента */
+            display: flex; /* Для удобного выравнивания кнопок */
+            gap: 10px; /* Расстояние между кнопками */
+        }
+
+        .corner-button {
+            background-color: rgba(98, 0, 255, 0.8);
+            color: #ffffff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .corner-button:hover {
+            background-color: #8f5ce6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Кнопки в углу -->
+    <div class="corner-buttons">
+        <button class="corner-button" onclick="goToMain()">Главная</button>
+    </div>
+
+    <div class="floating-bg" id="bg1"></div>
+    <div class="floating-bg" id="bg2"></div>
+    <div class="floating-bg" id="bg3"></div>
+    <div class="container">
+        <h1>VolkStore</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+        <button class="google-btn">
+            <img src="img site\google.png" alt="Google logo">
+            Войти с Google
+        </button>
+        <div class="switch-form">
+            <a href="register.html">Нет аккаунта? Зарегистрироваться</a>
+        </div>
+        <div id="message"></div>
+        <div id="errorMessage"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const messageDiv = document.getElementById('message');
+            const errorMessageDiv = document.getElementById('errorMessage');
+
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Предотвращаем отправку формы
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Скрываем предыдущие сообщения
+                messageDiv.style.display = 'none';
+                errorMessageDiv.style.display = 'none';
+
+                // Создаем объект FormData для отправки данных
+                const formData = new FormData();
+                formData.append('email', email);
+                formData.append('password', password);
+
+                // Отправляем данные на сервер
+                fetch('login_handler.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Показываем сообщение об успехе
+                        messageDiv.textContent = data.message;
+                        messageDiv.style.display = "block";
+                        
+                        // Перенаправляем на страницу профиля через 2 секунды
+                        setTimeout(() => {
+                            window.location.href = 'profile.php';
+                        }, 2000);
+                    } else {
+                        // Показываем сообщение об ошибке
+                        errorMessageDiv.textContent = data.message;
+                        errorMessageDiv.style.display = "block";
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    errorMessageDiv.textContent = "Произошла ошибка при отправке данных. Пожалуйста, попробуйте позже.";
+                    errorMessageDiv.style.display = "block";
+                });
+            });
+        });
+
+        function goToMain() {
+            window.location.href = "index.html"; // Переход на главную страницу
+        }
+    </script>
+</body>
+</html>

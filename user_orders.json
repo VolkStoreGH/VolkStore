@@ -1,0 +1,94 @@
+{
+  "ORD-20250321-123456-789": {
+    "customer": {
+      "id": 123456,
+      "name": "Иван Петров",
+      "username": "@ivanpetrov",
+      "email": "ivan.petrov@example.com",
+      "phone": "+7 (999) 123-45-67",
+      "address": "г. Москва, ул. Пушкина, д. 10, кв. 15"
+    },
+    "date": "21.03.2025 10:15",
+    "items": [
+      {
+        "title": "Cyberpunk 2077",
+        "quantity": 1,
+        "price": 5499
+      },
+      {
+        "title": "Elden Ring",
+        "quantity": 1,
+        "price": 3599
+      }
+    ],
+    "total": 9098,
+    "currency": "RUB",
+    "status": "Оплачен",
+    "comment": "Хочу получить как можно скорее!"
+  },
+  "ORD-20250320-654321-987": {
+    "customer": {
+      "id": 654321,
+      "name": "Мария Сидорова",
+      "username": "@mariasid",
+      "email": "maria.sidorova@example.com",
+      "phone": "+7 (999) 987-65-43"
+    },
+    "date": "20.03.2025 18:30",
+    "items": [
+      {
+        "title": "God of War",
+        "quantity": 1,
+        "price": 4499
+      }
+    ],
+    "total": 4499,
+    "currency": "RUB",
+    "status": "Ожидает оплаты"
+  },
+  "ORD-20250319-111222-333": {
+    "customer": {
+      "id": 111222,
+      "name": "Алексей Иванов",
+      "username": "@alexivanov",
+      "email": "alex.ivanov@example.com"
+    },
+    "date": "19.03.2025 14:15",
+    "items": [
+      {
+        "title": "Red Dead Redemption 2",
+        "quantity": 1,
+        "price": 2499
+      },
+      {
+        "title": "Detroit: Become Human",
+        "quantity": 1,
+        "price": 390
+      }
+    ],
+    "total": 2889,
+    "currency": "RUB",
+    "status": "Оплачен",
+    "comment": "Подарок для брата"
+  },
+  "ORD-20250318-444555-666": {
+    "customer": {
+      "id": 444555,
+      "name": "Екатерина Смирнова",
+      "username": "@katesmirn",
+      "phone": "+7 (999) 555-44-33",
+      "address": "г. Санкт-Петербург, Невский пр-т, д. 100, кв. 42"
+    },
+    "date": "18.03.2025 09:20",
+    "items": [
+      {
+        "title": "The Last of Us Part II",
+        "quantity": 1,
+        "price": 3999
+      }
+    ],
+    "total": 3999,
+    "currency": "RUB",
+    "status": "Доставлен"
+  }
+}

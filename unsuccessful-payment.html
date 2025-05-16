@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ошибка оплаты - VolkStore</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/unsuccessful_payment.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <header>
+        <img src="/img site/volkstore.png" alt="VolkStore" id="logo">
+        <div class="floating-icon" id="icon1">🎮</div>
+        <div class="floating-icon" id="icon2">🕹️</div>
+        <div class="floating-icon" id="icon3">🏆</div>
+        <div class="floating-icon" id="icon4">🚀</div>
+        <div class="floating-icon" id="icon5">💻</div>
+    </header>
+
+    <main class="payment-status">
+        <div class="status-container">
+            <div class="status-icon">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h1 class="status-title">Ошибка оплаты</h1>
+            <p class="status-message">К сожалению, при обработке вашего платежа произошла ошибка. Пожалуйста, проверьте данные и попробуйте снова.</p>
+            
+            <div class="error-details">
+                <div class="error-code">
+                    Код ошибки: ERR_PAYMENT_DECLINED
+                </div>
+                <p class="error-message">Банк отклонил транзакцию. Это может быть связано с недостаточными средствами, ограничениями по карте или другими причинами.</p>
+                
+                <div class="error-tips">
+                    <h3>Что можно сделать:</h3>
+                    <ul>
+                        <li>Проверьте баланс вашей карты</li>
+                        <li>Убедитесь, что карта активна и не заблокирована</li>
+                        <li>Проверьте правильность введенных данных</li>
+                        <li>Попробуйте использовать другую карту или способ оплаты</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary" onclick="window.history.back(); return false;">
+                    <i class="fas fa-redo"></i> Попробовать снова
+                </a>
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> На главную
+                </a>
+            </div>
+            
+            <div class="support-contact">
+                <p>Если проблема повторяется, свяжитесь с нашей службой поддержки:</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:support@volkstore.ru">support@volkstore.ru</a></p>
+                <p><i class="fas fa-comment"></i> <a href="https://t.me/VolkStoreTg" target="_blank">Telegram поддержка</a></p>
+            </div>
+            
+            <div class="redirect-message">
+                Вы будете автоматически перенаправлены на главную страницу через <span id="countdown" class="countdown">10</span> секунд
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 VolkStore. Все права защищены.</p>
+            <div class="footer-links">
+                <a href="#">О нас</a>
+                <a href="#">Помощь</a>
+                <a href="#">Контакты</a>
+            </div>
+            <div class="social-links">
+                <a href="https://vk.com/volkstorevk" target="_blank" aria-label="Вконтакте"><i class="fab fa-vk"></i></a>
+                <a href="https://t.me/VolkStoreTg" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="#" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            preloader.classList.add('hidden');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+            
+            // Start redirect countdown
+            startRedirectCountdown();
+        });
+        
+        // Redirect countdown function
+        function startRedirectCountdown() {
+            let seconds = 10;
+            const countdownElement = document.getElementById('countdown');
+            
+            // Update countdown every second
+            const countdownInterval = setInterval(function() {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                // When countdown reaches 0, redirect to main page
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
